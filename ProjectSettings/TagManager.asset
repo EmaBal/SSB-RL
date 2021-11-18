@@ -9,6 +9,8 @@ TagManager:
   - MovingPlatform
   - Enemy
   - coin
+  - DeathZone
+  - Rose
   layers:
   - Default
   - TransparentFX

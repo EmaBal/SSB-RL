@@ -89,7 +89,9 @@ public class CharacterController2D : MonoBehaviour {
 			return;
 
 		// determine horizontal velocity change based on the horizontal input
-		_vx = Input.GetAxisRaw ("Horizontal");
+		
+		//_vx = Input.GetAxisRaw ("Horizontal");
+		_vx = 0f;
 
 		// Determine if running based on the horizontal movement
 		if (_vx != 0) 
@@ -119,15 +121,15 @@ public class CharacterController2D : MonoBehaviour {
 		// Set the grounded animation states
 		_animator.SetBool("Grounded", _isGrounded);
 
-		if(_isGrounded && Input.GetButtonDown("Jump")) // If grounded AND jump button pressed, then allow the player to jump
-		{
-			DoJump();
-		} else if (_canDouvbleJump && Input.GetButtonDown("Jump")) 
-		{
-			DoJump();
-			// disable extra jump after double jumping
-			_canDouvbleJump = false;
-		}
+		// if(_isGrounded && Input.GetButtonDown("Jump")) // If grounded AND jump button pressed, then allow the player to jump
+		// {
+		// 	DoJump();
+		// } else if (_canDouvbleJump && Input.GetButtonDown("Jump")) 
+		// {
+		// 	DoJump();
+		// 	// disable extra jump after double jumping
+		// 	_canDouvbleJump = false;
+		// }
 	
 		// If the player stops jumping mid jump and player is not yet falling
 		// then set the vertical velocity to 0 (he will start to fall from gravity)
@@ -197,7 +199,7 @@ public class CharacterController2D : MonoBehaviour {
 	}
 
 	// make the player jump
-	void DoJump()
+	public void DoJump()
 	{
 		// reset current vertical motion to 0 prior to jump
 			_vy = 0f;
