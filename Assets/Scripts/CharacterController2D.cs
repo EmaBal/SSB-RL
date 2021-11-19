@@ -2,7 +2,10 @@
 using System.Collections;
 using UnityEngine.SceneManagement; // include so we can load new scenes
 
-public class CharacterController2D : MonoBehaviour {
+public class CharacterController2D : MonoBehaviour
+{
+
+	private CharacterAgent characterAgent;
 
 	// player controls
 	[Range(0.0f, 10.0f)] // create a slider in the editor and set limits on moveSpeed
@@ -21,8 +24,7 @@ public class CharacterController2D : MonoBehaviour {
 
 	// player can move?
 	// we want this public so other scripts can access it but we don't want to show in editor as it might confuse designer
-	[HideInInspector]
-	public bool playerCanMove = true;
+	[HideInInspector] public bool playerCanMove = true;
 
 	// SFXs
 	public AudioClip coinSFX;
@@ -54,7 +56,10 @@ public class CharacterController2D : MonoBehaviour {
 
 	// number of layer that Platforms are on (setup in Awake)
 	int _platformLayer;
-	
+
+	[HideInInspector] public int direction = 0;
+	[HideInInspector] public int jumping = 0;
+
 	void Awake () {
 		// get a reference to the components we are going to be changing and store a reference for efficiency purposes
 		_transform = GetComponent<Transform> ();
@@ -91,7 +96,7 @@ public class CharacterController2D : MonoBehaviour {
 		// determine horizontal velocity change based on the horizontal input
 		
 		//_vx = Input.GetAxisRaw ("Horizontal");
-		_vx = 0f;
+		_vx = direction;
 
 		// Determine if running based on the horizontal movement
 		if (_vx != 0) 
@@ -121,19 +126,19 @@ public class CharacterController2D : MonoBehaviour {
 		// Set the grounded animation states
 		_animator.SetBool("Grounded", _isGrounded);
 
-		// if(_isGrounded && Input.GetButtonDown("Jump")) // If grounded AND jump button pressed, then allow the player to jump
-		// {
-		// 	DoJump();
-		// } else if (_canDouvbleJump && Input.GetButtonDown("Jump")) 
-		// {
-		// 	DoJump();
-		// 	// disable extra jump after double jumping
-		// 	_canDouvbleJump = false;
-		// }
+		if(_isGrounded && jumping == 1) // If grounded AND jump button pressed, then allow the player to jump
+		{
+			DoJump();
+		} else if (_canDouvbleJump && jumping == 1) 
+		{
+			DoJump();
+			// disable extra jump after double jumping
+			_canDouvbleJump = false;
+		}
 	
 		// If the player stops jumping mid jump and player is not yet falling
 		// then set the vertical velocity to 0 (he will start to fall from gravity)
-		if(Input.GetButtonUp("Jump") && _vy>0f)
+		if(jumping == 2 && _vy>0f)
 		{
 			_vy = 0f;
 		}
@@ -255,7 +260,8 @@ public class CharacterController2D : MonoBehaviour {
 			
 			// After waiting tell the GameManager to reset the game
 			yield return new WaitForSeconds(2.0f);
-
+			
+			
 			if (GameManager.gm) // if the gameManager is available, tell it to reset the game
 				GameManager.gm.ResetGame();
 			else // otherwise, just reload the current level
@@ -276,8 +282,13 @@ public class CharacterController2D : MonoBehaviour {
 		FreezeMotion ();
 		_animator.SetTrigger("Victory");
 
-		if (GameManager.gm) // do the game manager level compete stuff, if it is available
+		if (GameManager.gm)
+		{
+			// do the game manager level compete stuff, if it is available
 			GameManager.gm.LevelCompete();
+			
+			//GameManager.gm.ResetGame(); //non passare al prossimo livello ma termina episodio e resetta livello
+		}
 	}
 
 	// public function to respawn the player at the appropriate location

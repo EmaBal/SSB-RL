@@ -172,7 +172,8 @@ public class GameManager : MonoBehaviour {
 	// public function to remove player life and reset game accordingly
 	public void ResetGame() {
 		// remove life and update GUI
-		lives--;
+		//lives--; NON RIMUOVO VITA PER TRAINING
+		lives = 0;
 		refreshGUI();
 
 		if (lives<=0) { // no more lives

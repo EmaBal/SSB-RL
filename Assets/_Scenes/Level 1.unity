@@ -1150,8 +1150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2989a637a6b9c448204c3d31f7d805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelAfterVictory: Level 2
-  levelAfterGameOver: GameLose
+  levelAfterVictory: Level 1
+  levelAfterGameOver: Level 1
   score: 0
   highscore: 0
   startLives: 3
@@ -13434,6 +13434,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 864682121333587454, guid: 16ed190435c719d45b14e17abee7f5f1,
+        type: 3}
+      propertyPath: MaxStep
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2026301097229731784, guid: 16ed190435c719d45b14e17abee7f5f1,
         type: 3}
       propertyPath: m_Name
@@ -13559,10 +13564,15 @@ PrefabInstance:
       propertyPath: m_DetectableTags.Array.data[6]
       value: MovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 4664403221540666215, guid: 16ed190435c719d45b14e17abee7f5f1,
+        type: 3}
+      propertyPath: MaxStep
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 8148000924754448025, guid: 16ed190435c719d45b14e17abee7f5f1,
         type: 3}
       propertyPath: m_BehaviorType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8148000924754448025, guid: 16ed190435c719d45b14e17abee7f5f1,
         type: 3}
@@ -13582,7 +13592,7 @@ PrefabInstance:
     - target: {fileID: 8148000924754448025, guid: 16ed190435c719d45b14e17abee7f5f1,
         type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.data[1]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8148000924754448025, guid: 16ed190435c719d45b14e17abee7f5f1,
         type: 3}
@@ -13597,9 +13607,16 @@ PrefabInstance:
     - target: {fileID: 8148000924754448025, guid: 16ed190435c719d45b14e17abee7f5f1,
         type: 3}
       propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.data[1]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8417599637599000835, guid: 16ed190435c719d45b14e17abee7f5f1,
+        type: 3}
+      propertyPath: DecisionPeriod
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 864682121333587454, guid: 16ed190435c719d45b14e17abee7f5f1, type: 3}
+    - {fileID: 3025707077088744308, guid: 16ed190435c719d45b14e17abee7f5f1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 16ed190435c719d45b14e17abee7f5f1, type: 3}
 --- !u!1001 &2826920216261704475
 PrefabInstance:

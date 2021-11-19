@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 2667043002372383801}
   - component: {fileID: 4660965317135703003}
   - component: {fileID: 8148000924754448025}
-  - component: {fileID: 864682121333587454}
-  - component: {fileID: 8417599637599000835}
   - component: {fileID: 4627205581687948218}
+  - component: {fileID: 4664403221540666215}
+  - component: {fileID: 4292749105042784001}
   m_Layer: 8
   m_Name: Sparty
   m_TagString: Player
@@ -296,6 +296,8 @@ MonoBehaviour:
   fallSFX: {fileID: 8300000, guid: d454cb6b79c8b724a90987812a97beef, type: 3}
   jumpSFX: {fileID: 8300000, guid: f3737e102e349894cbf0faaa241538ca, type: 3}
   victorySFX: {fileID: 8300000, guid: 625e5d4e72a2c684d8f998b9e6ad30f3, type: 3}
+  direction: 0
+  jumping: 0
 --- !u!114 &8148000924754448025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,36 +328,6 @@ MonoBehaviour:
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
---- !u!114 &864682121333587454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026301097229731784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2225930656a80af4cbdee785f12e976a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
---- !u!114 &8417599637599000835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026301097229731784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
 --- !u!114 &4627205581687948218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +352,36 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &4664403221540666215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026301097229731784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2225930656a80af4cbdee785f12e976a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+--- !u!114 &4292749105042784001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026301097229731784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 1
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &2440582509510373873
 GameObject:
   m_ObjectHideFlags: 0
