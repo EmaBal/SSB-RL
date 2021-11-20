@@ -28,10 +28,12 @@ public class GameManager : MonoBehaviour {
 
 	// private variables
 	GameObject _player;
-	Vector3 _spawnLocation;
+	public Vector3 _spawnLocation;
 	Scene _scene;
 	AudioSource _audio;
 
+	public SpriteRenderer victoryColor;
+	
 	// set things up here
 	void Awake () {
 		// setup reference to game manager
@@ -57,7 +59,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	// setup all the variables, the UI, and provide errors if things not setup properly.
-	void setupDefaults() {
+	void setupDefaults()
+	{
+
+		victoryColor.enabled = false;
+		
 		// setup reference to player
 		if (_player == null)
 			_player = GameObject.FindGameObjectWithTag("Player");

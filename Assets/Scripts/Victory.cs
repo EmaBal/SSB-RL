@@ -6,6 +6,8 @@ public class Victory : MonoBehaviour {
 	public bool taken = false;
 	public GameObject explosion;
 
+	public SpriteRenderer victoryColor;
+
 	// if the player touches the victory object, it has not already been taken, and the player can move (not dead or victory)
 	// then the player has reached the victory point of the level
 	void OnTriggerEnter2D (Collider2D other)
@@ -21,6 +23,8 @@ public class Victory : MonoBehaviour {
 				Instantiate(explosion,transform.position,transform.rotation);
 			}
 
+			victoryColor.enabled = true;
+			
 			// do the player victory thing
 			other.gameObject.GetComponent<CharacterController2D>().Victory();
 

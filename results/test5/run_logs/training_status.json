@@ -1,0 +1,65 @@
+{
+    "CharacterBehav": {
+        "checkpoints": [
+            {
+                "steps": 899984,
+                "file_path": "results\\test5\\CharacterBehav\\CharacterBehav-899984.onnx",
+                "reward": null,
+                "creation_time": 1637430176.5846372,
+                "auxillary_file_paths": [
+                    "results\\test5\\CharacterBehav\\CharacterBehav-899984.pt"
+                ]
+            },
+            {
+                "steps": 949959,
+                "file_path": "results\\test5\\CharacterBehav\\CharacterBehav-949959.onnx",
+                "reward": 0.2666666665010982,
+                "creation_time": 1637430254.5436761,
+                "auxillary_file_paths": [
+                    "results\\test5\\CharacterBehav\\CharacterBehav-949959.pt"
+                ]
+            },
+            {
+                "steps": 999971,
+                "file_path": "results\\test5\\CharacterBehav\\CharacterBehav-999971.onnx",
+                "reward": 0.3500000059604645,
+                "creation_time": 1637430331.0647113,
+                "auxillary_file_paths": [
+                    "results\\test5\\CharacterBehav\\CharacterBehav-999971.pt"
+                ]
+            },
+            {
+                "steps": 1049985,
+                "file_path": "results\\test5\\CharacterBehav\\CharacterBehav-1049985.onnx",
+                "reward": 0.1826087016126384,
+                "creation_time": 1637430409.93626,
+                "auxillary_file_paths": [
+                    "results\\test5\\CharacterBehav\\CharacterBehav-1049985.pt"
+                ]
+            },
+            {
+                "steps": 1090485,
+                "file_path": "results\\test5\\CharacterBehav\\CharacterBehav-1090485.onnx",
+                "reward": null,
+                "creation_time": 1637430476.5562186,
+                "auxillary_file_paths": [
+                    "results\\test5\\CharacterBehav\\CharacterBehav-1090485.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1090485,
+            "file_path": "results\\test5\\CharacterBehav.onnx",
+            "reward": null,
+            "creation_time": 1637430476.5562186,
+            "auxillary_file_paths": [
+                "results\\test5\\CharacterBehav\\CharacterBehav-1090485.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

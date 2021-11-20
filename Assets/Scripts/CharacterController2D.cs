@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement; // include so we can load new scenes
 
 public class CharacterController2D : MonoBehaviour
 {
 
-	private CharacterAgent characterAgent;
+	public event EventHandler OnDied;
 
+	private static CharacterController2D instance;
+	
 	// player controls
 	[Range(0.0f, 10.0f)] // create a slider in the editor and set limits on moveSpeed
 	public float moveSpeed = 3f;
@@ -60,7 +63,15 @@ public class CharacterController2D : MonoBehaviour
 	[HideInInspector] public int direction = 0;
 	[HideInInspector] public int jumping = 0;
 
-	void Awake () {
+	public static CharacterController2D getInstance()
+	{
+		return instance;
+	}
+	void Awake ()
+	{
+
+		instance = this;
+		
 		// get a reference to the components we are going to be changing and store a reference for efficiency purposes
 		_transform = GetComponent<Transform> ();
 		
@@ -232,6 +243,7 @@ public class CharacterController2D : MonoBehaviour
 			playerHealth -= damage;
 
 			if (playerHealth <= 0) { // player is now dead, so start dying
+				if (OnDied != null) OnDied(this, EventArgs.Empty);
 				PlaySound(deathSFX);
 				StartCoroutine (KillPlayer ());
 			}
@@ -303,5 +315,10 @@ public class CharacterController2D : MonoBehaviour
 	public void EnemyBounce()
 	{
 		DoJump();
+	}
+
+	public void ResetRLEpisode()
+	{
+		GameManager.gm.ResetGame();
 	}
 }

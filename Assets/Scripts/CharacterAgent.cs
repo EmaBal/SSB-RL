@@ -9,9 +9,23 @@ using Unity.MLAgents.Sensors;
 public class CharacterAgent : Agent
 {
     private CharacterController2D character;
-    
-    private void Awake() {
+    private Vector3 localPos;
+    //private bool isInitCalled = false;
+
+    private void Awake()
+    {
         character = GetComponent<CharacterController2D>();
+    }
+
+    private void Start()
+    {
+        CharacterController2D.getInstance().OnDied += Character_OnDied;
+    }
+
+    private void Character_OnDied(object sender, System.EventArgs e)
+    {
+        Debug.Log("END EPISODE");
+        EndEpisode();
     }
     
     public override void CollectObservations(VectorSensor sensor)
@@ -19,10 +33,11 @@ public class CharacterAgent : Agent
         sensor.AddObservation(character.transform.localPosition);
     }
 
-    public override void OnEpisodeBegin()
-    {
-        
-    }
+    // public override void OnEpisodeBegin()
+    // {
+    //     if (isInitCalled)
+    //         character.Respawn(localPos);
+    // }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
 
@@ -85,7 +100,6 @@ public class CharacterAgent : Agent
         if (c.gameObject.CompareTag("DeathZone"))
         {
             AddReward(-1f);
-            Debug.Log("DEATHZONE COLLISION");
             EndEpisode();
         }
     }
@@ -95,18 +109,15 @@ public class CharacterAgent : Agent
         if (collision.gameObject.CompareTag("coin"))
         {
             AddReward(.1f);
-            Debug.Log("COIN COLLISION");
         }
         if (collision.gameObject.CompareTag("Rose"))
         {
             AddReward(5f);
-            Debug.Log("ROSE COLLISION");
             EndEpisode();
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
             AddReward(-1f);
-            Debug.Log("ENEMY COLLISION");
             EndEpisode();
         }
     }
