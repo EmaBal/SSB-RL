@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -9,19 +10,44 @@ using Unity.MLAgents.Sensors;
 public class CharacterAgent : Agent
 {
     private CharacterController2D character;
+    private Victory rose;
     private Vector3 localPos;
+    private Vector3 rosePos;
+
+    private int jumpNumber = 0;
+    private int stepCount = 0;
+    
     //private bool isInitCalled = false;
 
     private void Awake()
     {
         character = GetComponent<CharacterController2D>();
+        rose = GameObject.Find("Victory").GetComponent<Victory>();
+        rosePos = rose.transform.localPosition;
+        Academy.Instance.AutomaticSteppingEnabled = false;
     }
-
+    
     private void Start()
     {
         CharacterController2D.getInstance().OnDied += Character_OnDied;
     }
 
+    private void FixedUpdate()
+    {
+        Debug.Log("stepCount: "+stepCount);
+        stepCount++;
+        if (stepCount >= MaxStep)
+        {
+            StartCoroutine(character.KillPlayer());
+            EndEpisode();
+        }
+    }
+
+    void Update()
+    {
+        Academy.Instance.EnvironmentStep();
+    }
+    
     private void Character_OnDied(object sender, System.EventArgs e)
     {
         Debug.Log("END EPISODE");
@@ -31,6 +57,24 @@ public class CharacterAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(character.transform.localPosition);
+        if (character._isGrounded)
+        {
+            jumpNumber = 2;
+        } else if (character._canDouvbleJump)
+        {
+            jumpNumber = 1;
+            Debug.Log("JUMPNUMB: " + jumpNumber);
+        }
+        else
+        {
+            jumpNumber = 0;
+        }
+        
+        sensor.AddObservation(jumpNumber);
+        //sensor.AddObservation(character._canDouvbleJump);
+        //sensor.AddObservation(character._isGrounded);
+        sensor.AddObservation(rosePos);
+
     }
 
     // public override void OnEpisodeBegin()
@@ -40,9 +84,6 @@ public class CharacterAgent : Agent
     // }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-
-        var dirToGo = Vector2.zero;
-        
         var movement = actionBuffers.DiscreteActions[0];
         var jump = actionBuffers.DiscreteActions[1];
 
@@ -65,12 +106,15 @@ public class CharacterAgent : Agent
                 character.jumping = 0; //non sta saltando
                 break;
             case 1:
-                character.jumping = 1; //jump down
+                character.jumping = 1; //jump button down
                 break;
             case 2:
-                character.jumping = 2; //jump up
+                character.jumping = 2; //jump button up
                 break;
         }
+        AddReward(-1f / MaxStep);
+        Debug.Log("CANDJ: " + character._canDouvbleJump);
+        character.CharacterControllerUpdate();
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -113,6 +157,7 @@ public class CharacterAgent : Agent
         if (collision.gameObject.CompareTag("Rose"))
         {
             AddReward(5f);
+            Debug.Log("END EPISODE WIN");
             EndEpisode();
         }
         if (collision.gameObject.CompareTag("Enemy"))

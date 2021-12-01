@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour {
 	Scene _scene;
 	AudioSource _audio;
 
-	public SpriteRenderer victoryColor;
-	
 	// set things up here
 	void Awake () {
 		// setup reference to game manager
@@ -62,8 +60,6 @@ public class GameManager : MonoBehaviour {
 	void setupDefaults()
 	{
 
-		victoryColor.enabled = false;
-		
 		// setup reference to player
 		if (_player == null)
 			_player = GameObject.FindGameObjectWithTag("Player");
