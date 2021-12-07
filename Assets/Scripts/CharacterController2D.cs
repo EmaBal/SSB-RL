@@ -352,8 +352,8 @@ public class CharacterController2D : MonoBehaviour
 	public void CollectCoin(int amount) {
 		PlaySound(coinSFX);
 
-		if (GameManager.gm) // add the points through the game manager, if it is available
-			GameManager.gm.AddPoints(amount);
+		// if (GameManager.gm) // add the points through the game manager, if it is available
+		// 	GameManager.gm.AddPoints(amount);
 	}
 
 	// public function on victory over the level

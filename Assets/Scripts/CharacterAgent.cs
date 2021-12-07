@@ -34,7 +34,6 @@ public class CharacterAgent : Agent
 
     private void FixedUpdate()
     {
-        Debug.Log("stepCount: "+stepCount);
         stepCount++;
         if (stepCount >= MaxStep)
         {
@@ -63,7 +62,7 @@ public class CharacterAgent : Agent
         } else if (character._canDouvbleJump)
         {
             jumpNumber = 1;
-            Debug.Log("JUMPNUMB: " + jumpNumber);
+            //Debug.Log("JUMPNUMB: " + jumpNumber);
         }
         else
         {
@@ -113,7 +112,7 @@ public class CharacterAgent : Agent
                 break;
         }
         AddReward(-1f / MaxStep);
-        Debug.Log("CANDJ: " + character._canDouvbleJump);
+        Debug.Log("JUMP: " + jump);
         character.CharacterControllerUpdate();
     }
 

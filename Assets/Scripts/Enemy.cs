@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	// if not stunned then move the enemy when time is > _moveTime
-	void Update () {
+	void FixedUpdate () {
 		if (!isStunned)
 		{
 			if (Time.time >= _moveTime) {
