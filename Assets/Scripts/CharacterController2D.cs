@@ -209,7 +209,6 @@ public class CharacterController2D : MonoBehaviour
 			DoJump();
 		} else if (_canDouvbleJump && jumping == 1) 
 		{
-			Debug.Log("TEST");
 			DoJump();
 			// disable extra jump after double jumping
 			_canDouvbleJump = false;

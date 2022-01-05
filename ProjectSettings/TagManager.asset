@@ -11,14 +11,15 @@ TagManager:
   - coin
   - DeathZone
   - Rose
+  - Teleport
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CoinLayer
   - Water
   - UI
-  - 
+  - RoseLayer
   - 
   - Player
   - Platform

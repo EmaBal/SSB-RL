@@ -22,7 +22,7 @@ public class CharacterAgent : Agent
     private void Awake()
     {
         character = GetComponent<CharacterController2D>();
-        rose = GameObject.Find("Victory").GetComponent<Victory>();
+        rose = GameObject.FindWithTag("Rose").GetComponent<Victory>();
         rosePos = rose.transform.localPosition;
         Academy.Instance.AutomaticSteppingEnabled = false;
     }
@@ -112,7 +112,6 @@ public class CharacterAgent : Agent
                 break;
         }
         AddReward(-1f / MaxStep);
-        Debug.Log("JUMP: " + jump);
         character.CharacterControllerUpdate();
     }
 
@@ -144,6 +143,10 @@ public class CharacterAgent : Agent
         {
             AddReward(-1f);
             EndEpisode();
+        }
+        if (c.gameObject.CompareTag("Teleport"))
+        {
+            AddReward(4f);
         }
     }
 
