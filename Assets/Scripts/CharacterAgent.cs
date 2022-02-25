@@ -16,8 +16,6 @@ public class CharacterAgent : Agent
 
     private int jumpNumber = 0;
     private int stepCount = 0;
-    
-    //private bool isInitCalled = false;
 
     private void Awake()
     {
@@ -62,7 +60,6 @@ public class CharacterAgent : Agent
         } else if (character._canDouvbleJump)
         {
             jumpNumber = 1;
-            //Debug.Log("JUMPNUMB: " + jumpNumber);
         }
         else
         {
@@ -70,17 +67,9 @@ public class CharacterAgent : Agent
         }
         
         sensor.AddObservation(jumpNumber);
-        //sensor.AddObservation(character._canDouvbleJump);
-        //sensor.AddObservation(character._isGrounded);
         sensor.AddObservation(rosePos);
 
     }
-
-    // public override void OnEpisodeBegin()
-    // {
-    //     if (isInitCalled)
-    //         character.Respawn(localPos);
-    // }
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
         var movement = actionBuffers.DiscreteActions[0];
@@ -112,7 +101,6 @@ public class CharacterAgent : Agent
                 break;
         }
         AddReward(-1f / MaxStep);
-        character.CharacterControllerUpdate();
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)

@@ -97,82 +97,13 @@ public class CharacterController2D : MonoBehaviour
 		_platformLayer = LayerMask.NameToLayer("Platform");
 	}
 
-	// this is where most of the player controller magic happens each game event loop
-	/*void Update()
-	{
-		Debug.Log("UPDATE");
-		// exit update if player cannot move or game is paused
-		if (!playerCanMove || (Time.timeScale == 0f))
-			return;
-
-		// determine horizontal velocity change based on the horizontal input
-		
-		//_vx = Input.GetAxisRaw ("Horizontal");
-		_vx = direction;
-
-		// Determine if running based on the horizontal movement
-		if (_vx != 0) 
-		{
-			_isRunning = true;
-		} else {
-			_isRunning = false;
-		}
-
-		// set the running animation state
-		_animator.SetBool("Running", _isRunning);
-
-		// get the current vertical velocity from the rigidbody component
-		_vy = _rigidbody.velocity.y;
-
-		// Check to see if character is grounded by raycasting from the middle of the player
-		// down to the groundCheck position and see if collected with gameobjects on the
-		// whatIsGround layer
-		_isGrounded = Physics2D.Linecast(_transform.position, groundCheck.position, whatIsGround);  
-
-		// allow double jump after grounded
-		if(_isGrounded)
-		{
-			_canDouvbleJump = true;
-		}
-
-		// Set the grounded animation states
-		_animator.SetBool("Grounded", _isGrounded);
-
-		if(_isGrounded && jumping == 1) // If grounded AND jump button pressed, then allow the player to jump
-		{
-			DoJump();
-		} else if (_canDouvbleJump && jumping == 1) 
-		{
-			DoJump();
-			// disable extra jump after double jumping
-			_canDouvbleJump = false;
-		}
-	
-		// If the player stops jumping mid jump and player is not yet falling
-		// then set the vertical velocity to 0 (he will start to fall from gravity)
-		if(jumping == 2 && _vy>0f)
-		{
-			_vy = 0f;
-		}
-
-		// Change the actual velocity on the rigidbody
-		_rigidbody.velocity = new Vector2(_vx * moveSpeed, _vy);
-
-		// if moving up then don't collide with platform layer
-		// this allows the player to jump up through things on the platform layer
-		// NOTE: requires the platforms to be on a layer named "Platform"
-		Physics2D.IgnoreLayerCollision(_playerLayer, _platformLayer, (_vy > 0.0f)); 
-	}*/
-	
-	public void CharacterControllerUpdate()
+	public void Update()
 	{
 		// exit update if player cannot move or game is paused
 		if (!playerCanMove || (Time.timeScale == 0f))
 			return;
 
 		// determine horizontal velocity change based on the horizontal input
-		
-		//_vx = Input.GetAxisRaw ("Horizontal");
 		_vx = direction;
 
 		// Determine if running based on the horizontal movement
@@ -193,6 +124,8 @@ public class CharacterController2D : MonoBehaviour
 		// down to the groundCheck position and see if collected with gameobjects on the
 		// whatIsGround layer
 		//_isGrounded = Physics2D.Linecast(_transform.position, groundCheck.position, whatIsGround);
+		
+		//fixato groundCheck
 		_isGrounded = Physics2D.Linecast(new Vector2(groundCheck.position.x, groundCheck.position.y + 0.1f), groundCheck.position, whatIsGround);
 
 		// allow double jump after grounded
